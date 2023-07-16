@@ -1,18 +1,23 @@
 import React, {useState} from 'react';
 import { uid } from 'uid';
-const Form = () => {
+
+let getId=uid(16)
+const Form = ({handleAddItems}) => {
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = useState(1);
+    const [items, setItems] = useState([]);
+
 
     function handleSubmit(e){
             e.preventDefault()
         if(!description) return;
-        const newItem={description,quantity,packed:false,
-        id:uid(16)}
 
+        const newItem={
+            description,quantity,packed:false, id:getId
+        }
+        handleAddItems(newItem)
         setDescription('')
         setQuantity(1)
-
     }
 
     return (
